@@ -10,6 +10,8 @@ void delete_first();
 void delete_middle();
 void delete_last();
 void display();
+void length_list();
+void search_list();
 struct node
     {
         int data;
@@ -21,7 +23,10 @@ void main()
         do
         {
             printf("\n------------Linked List-------------");
-            printf("\n 1. Create\n 2. Insert At First\n 3. Insert At Middle\n 4. Insert At Last\n 5. Delete At First\n 6. Delete At Middle\n 7. Delete at Last\n 8. Display\n 9. Exit");
+            printf("\n 1. Create");
+            printf("\n 2. Insert At First\n 3. Insert At Middle\n 4. Insert At Last");
+            printf("\n 5. Delete At First\n 6. Delete At Middle\n 7. Delete at Last");
+            printf("\n 8. Display\n 9. Count/length\n 10. Search an Element\n 11. Exit");
             printf("\n------------------------------------");
             printf("\nEnter Your Choice:");
             scanf("%d", &choice);
@@ -35,10 +40,12 @@ void main()
                     case 6: delete_middle(); break;
                     case 7: delete_last(); break;
                     case 8: display(); break;
-                    case 9: break;
+                    case 9: length_list(); break;
+                    case 10: search_list(); break;
+                    case 11: break;
                     default: printf("\nInvalid Choice!!!!!");
                 }
-        } while (choice != 9);
+        } while (choice != 11);
     }
 void create()
     {
@@ -191,5 +198,46 @@ void delete_middle()
                 prev -> add = next;
                 printf("\nDeleted Element is: %d", temp -> data);
                 free(temp);
+            }
+    }
+void length_list()
+    {
+        int count = 0;
+        if(start == NULL)
+            printf("\nList Not Found!!!!!");
+        else
+            {
+                temp = start;
+                while(temp != NULL)
+                    {
+                        count++;
+                        temp = temp -> add;
+                    }
+                printf("\nLength Of The List is %d", count);
+            }
+    }
+void search_list()
+    {
+        int n, f = 0;           //  f is a flag variable 0 or 1 like boolean true false
+        if(start == NULL)
+            printf("\nList Not Found!!!!");
+        else
+            {
+                printf("\nEnter an Element to Search:");
+                scanf("%d", &n);
+                temp = start;
+                while(temp != NULL)
+                    {
+                        if(temp -> data == n)
+                            {
+                                f = 1;
+                                break;          // no need to check further after getting one position
+                            }
+                        temp = temp -> add;
+                    }
+                if(f == 1)
+                    printf("\nSearching is Successfull......");
+                else
+                    printf("\nSeaching is Not Successfull!!!!!!");
             }
     }
